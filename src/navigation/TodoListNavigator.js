@@ -11,7 +11,7 @@ export default TodoNavigator = () => {
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name="Bienvenida" component={WelcomeScreen} />
-                <Stack.Screen name="Creando" component={CreateListScreen} />
+                <Stack.Screen name="Creando Lista" component={CreateListScreen} />
                 <Stack.Screen name="Lista" component={ListScreen} />
             </Stack.Navigator>
         </NavigationContainer>

@@ -38,21 +38,6 @@ export default function App() {
       ...currentState, {...completList},
     ])
     setSelectScreen('home')
-    console.log(menuList)
-  }
-
-  let content = <WelcomeScreen onWelcome={handleScreen} menuList={menuList}/>
-  
-  if(selectScreen === 'home') {
-    content = <WelcomeScreen onWelcome={handleScreen} menuList={menuList}/>
-  }
-
-  if(selectScreen === 'createList') {
-    content = <CreateListScreen onStartApp={handleStartList}/>
-  }
-  
-  if (listName) {
-    content = <ListScreen onSaveList={handleSaveList} listName={listName}/>
   }
 
   if(!loaded) {
@@ -60,10 +45,7 @@ export default function App() {
   }
   
   return (
-      <View style={styles.container}>
-        <Header title={"TodayDo"} newStyles={{fontFamily: 'PermanentMarker'}}/>
-        {content}
-      </View>
+    <TodoNavigator/>
   )
 }
 

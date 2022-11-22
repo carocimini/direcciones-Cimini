@@ -9,7 +9,7 @@ import React from 'react'
 import colors from "../constants/colors";
 import { useState } from "react";
 
-const ListScreen = (props) => {
+const ListScreen = (props, {navigation}) => {
     const {onSaveList, listName} = props
     const [textItem, setTextItem] = useState('')
     const [list, setList] = useState([])
@@ -106,7 +106,6 @@ return (
                         <Text>Actualizar</Text>
                     </Pressable>
                 </Card>
-                <Button title='Guardar y Salir' onPress={() => onSaveList(completList)}/>
             </View>
         </View>
     </TouchableWithoutFeedback>

@@ -14,7 +14,7 @@ import React from "react";
 import colors from "../constants/colors";
 import { useState } from "react";
 
-const CreateListScreen = ({onStartApp}) => {
+const CreateListScreen = ({navigation}) => {
     const [nameValue, setNameValue] = useState('')
     const [confirmed, setConfirmed] = useState(false)
     const [selectedName, setSelectedName] = useState('')
@@ -54,7 +54,7 @@ const CreateListScreen = ({onStartApp}) => {
                 {confirmed && (
                     <Card newStyles={{marginTop:50,}}>
                         <Text style={{marginTop: 20,}}>Para crear la lista "{selectedName}", haz click en continuar</Text>
-                        <Button title="Continuar" onPress={() => onStartApp(selectedName)}/>
+                        <Button title="Continuar" onPress={() => navigation.navigate("Lista")}/>
                     </Card>
                 )} 
                 

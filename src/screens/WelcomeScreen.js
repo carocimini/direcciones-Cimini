@@ -5,14 +5,9 @@ import Card from '../components/card'
 import Lista from '../components/lista'
 import colors from '../constants/colors'
 
-const WelcomeScreen = ({onWelcome}, props) => {
-    const {menuList} = props
+const WelcomeScreen = ({navigation}) => {
     const [listsExist, setListsExist] = useState(false)
     const screenName = 'createList'
-    
-    if(menuList < 1) {
-        setListsExist(true)
-    }
 
     const renderList = ({item}) => (
         <View>
@@ -34,12 +29,9 @@ const WelcomeScreen = ({onWelcome}, props) => {
         <Text style={styles.titulo}>Mis Listas:</Text>
         <View style={styles.subContainer}>
             <Text style={styles.subtitulo}>Aun no tienes listas...</Text>
-            {listsExist && (
-                <Lista list={menuList} renderItem={renderList}/>
-            )} 
         </View>
         <Card newStyles={{marginBottom: 50}}>
-            <Pressable style={styles.createButton} onPress={() => onWelcome(screenName)}>
+            <Pressable style={styles.createButton} onPress={() => navigation.navigate("Creando Lista")}>
                 <Text>Crear Lista</Text>
             </Pressable>
         </Card>
