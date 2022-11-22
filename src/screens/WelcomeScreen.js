@@ -32,10 +32,13 @@ const WelcomeScreen = ({onWelcome}, props) => {
     <View style={styles.screen}>
         <Text style={styles.titulo}>Bienvenid@!</Text>
         <Text style={styles.titulo}>Mis Listas:</Text>
-        {listsExist && (
-            <Lista list={menuList} renderItem={renderList}/>
-        )} 
-        <Card>
+        <View style={styles.subContainer}>
+            <Text style={styles.subtitulo}>Aun no tienes listas...</Text>
+            {listsExist && (
+                <Lista list={menuList} renderItem={renderList}/>
+            )} 
+        </View>
+        <Card newStyles={{marginBottom: 50}}>
             <Pressable style={styles.createButton} onPress={() => onWelcome(screenName)}>
                 <Text>Crear Lista</Text>
             </Pressable>
@@ -52,6 +55,12 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         marginTop: 20,
+    },
+    subContainer: {
+        flex: 1,
+        alignItems: "center",
+        paddingTop: 5,
+        marginTop: 0,
     },
     titulo:{
         fontSize: 30,

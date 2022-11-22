@@ -6,6 +6,7 @@ import {
 import CreateListScreen from "./src/screens/CreateListScreen";
 import Header from "./src/components/Header";
 import ListScreen from "./src/screens/listScreen";
+import TodoNavigator from "./src/navigation/TodoListNavigator";
 import WelcomeScreen from "./src/screens/WelcomeScreen"
 import colors from "./src/constants/colors";
 import { useFonts } from "expo-font";
@@ -13,7 +14,8 @@ import { useState } from "react";
 
 export default function App() {
   const [loaded] = useFonts({
-    PermanentMarker: require('./src/assets/fonts/PermanentMarker-Regular.ttf')
+    PermanentMarker: require('./src/assets/fonts/PermanentMarker-Regular.ttf'),
+    Roboto: require('./src/assets/fonts/Roboto-Regular.ttf')
   })
   
   
@@ -58,10 +60,10 @@ export default function App() {
   }
   
   return (
-    <View style={styles.container}>
-      <Header title={"TodayDo"} newStyles={{fontFamily: 'PermanentMarker'}}/>
-      {content}
-    </View>
+      <View style={styles.container}>
+        <Header title={"TodayDo"} newStyles={{fontFamily: 'PermanentMarker'}}/>
+        {content}
+      </View>
   )
 }
 

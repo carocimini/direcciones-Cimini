@@ -4,13 +4,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const Stack = createNativeStackNavigat()
+const Stack = createNativeStackNavigator()
 
-const TodoListNavigator = () => {
+export default TodoNavigator = () => {
     return(
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen />
+                <Stack.Screen name="Bienvenida" component={WelcomeScreen} />
+                <Stack.Screen name="Creando" component={CreateListScreen} />
+                <Stack.Screen name="Lista" component={ListScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     )

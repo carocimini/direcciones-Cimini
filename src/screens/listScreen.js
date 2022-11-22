@@ -1,4 +1,4 @@
-import { Button, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View, } from 'react-native'
 
 import AddItem from "../components/addItem"
 import Card from '../components/card';
@@ -64,13 +64,17 @@ const ListScreen = (props) => {
 
     const renderItem = ({item}) => (
         <View style={styles.lista}>
-        <Text style={styles.subtitulo}>{item.value}</Text>
-        <TouchableOpacity style={styles.buttoncheck} onPress={() => completItem(item.id, item.value)}>
-            <Text style={{color:"white"}}>Lista</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonlista} onPress={() => selectedItem(item.id)}>
-            <Text style={{color:"white"}}>X</Text>
-        </TouchableOpacity>
+            <View style={{width: '70%',}}>
+                <Text style={styles.subtitulo}>{item.value}</Text>
+            </View>
+            <View style={{flexDirection: 'row',}}>
+                <TouchableOpacity style={styles.buttoncheck} onPress={() => completItem(item.id, item.value)}>
+                    <Text style={{color:"white"}}>Lista</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonlista} onPress={() => selectedItem(item.id)}>
+                    <Text style={{color:"white"}}>X</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 
@@ -81,29 +85,32 @@ const ListScreen = (props) => {
     )
 
 return (
-    <View style={styles.container}>
-        <Text style={styles.titulo}>Lista {listName}</Text>
-        <View style={styles.subContainer}>
-            <Text style={styles.titulo}>Crear Tareas</Text>
-            <Text style={styles.subtitulo}>Agrega aqui tus tareas pendientes para hoy</Text>
-            <AddItem textItem={textItem} onHandleChange={onHandleChange} addItem={addItem}/>
-            <Lista list={list} renderItem={renderItem}/>
-            <Modal isVisible={modalVisible} actionDeleteItem={deleteItem} actionHideModal={hideModal}/>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <View style={styles.container}>
+            <Text style={styles.titulo}>Lista {listName}:</Text>
+            <View style={styles.subContainer}>
+                <Text style={styles.midTitulo}>Crear Tareas</Text>
+                <Text style={styles.subtitulo}>Agrega aqui tus tareas pendientes para hoy</Text>
+                <AddItem textItem={textItem} onHandleChange={onHandleChange} addItem={addItem}/>
+                <Lista list={list} renderItem={renderItem}/>
+                <Modal isVisible={modalVisible} actionDeleteItem={deleteItem} actionHideModal={hideModal}/>
+            </View>
+            <View style={styles.subListContainer}>
+                <Text style={styles.subtitulo}>Estas son las tareas completadas:</Text>
+                <ListaCompleta subList={subList} renderOldItem={renderOldItem}/>
+            </View>
+            <View style={styles.bottomContainer}>
+                <Card newStyles={{marginBottom: 10, padding: 10,}}>
+                    <Text style={styles.subtitulo}>Para guardar los cambios haz click en Actualizar</Text>
+                    <Pressable style={styles.saveButton} onPress={saveChanges}>
+                        <Text>Actualizar</Text>
+                    </Pressable>
+                </Card>
+                <Button title='Guardar y Salir' onPress={() => onSaveList(completList)}/>
+            </View>
         </View>
-        <View style={styles.subContainer}>
-            <Text style={styles.subtitulo}>Estas son las tareas completadas:</Text>
-            <ListaCompleta subList={subList} renderOldItem={renderOldItem}/>
-        </View>
-        <View style={styles.subContainer}>
-            <Card>
-                <Text style={styles.subtitulo}>Para guardar los cambios haz click en Actualizar</Text>
-                <Pressable style={styles.saveButton} onPress={saveChanges}>
-                    <Text>Actualizar</Text>
-                </Pressable>
-            </Card>
-            <Button title='Guardar y salir' onPress={() => onSaveList(completList)}/>
-        </View>
-    </View>
+    </TouchableWithoutFeedback>
+    
 )}
 
 export default ListScreen
@@ -113,15 +120,36 @@ const styles = StyleSheet.create({
         flex:1,
     },
     subContainer: {
+        marginBottom: 200,
         flex: 1,
         alignItems: "center",
-        paddingTop: 5,
-        marginTop: 0,
+        paddingTop: 10,
+        marginTop: 5,
+    },
+    subListContainer: {
+        marginBottom: 5,
+        flex: 1,
+        alignItems: "center",
+        paddingTop: 10,
+        marginTop: 5,
+    },
+    bottomContainer: {
+        marginBottom: 10,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     titulo:{
         fontSize: 30,
         fontWeight: "700",
-        marginBottom: 20,
+        color: colors.primary,
+        marginTop: 20,
+        marginLeft: 20,
+    },
+    midTitulo:{
+        fontSize: 27,
+        fontWeight: "700",
+        marginBottom: 15,
         color: colors.primary,
     },
     subtitulo: {
@@ -137,9 +165,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
-        width:"95%",
-        marginTop: 20,
-        marginHorizontal: 10,
+        width:"90%",
+        marginTop: 10,
+        marginHorizontal: 20,
         borderRadius: 5,
         backgroundColor: "rgba(0,0,0,0.05)",
         padding: 5,
@@ -148,9 +176,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-evenly",
         alignItems: "center",
-        width:"85%",
-        marginTop: 20,
-        marginHorizontal: 30,
+        width:"90%",
+        marginTop: 10,
+        marginHorizontal: 20,
         borderRadius: 5,
         backgroundColor: colors.light,
         padding: 5,
@@ -179,5 +207,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
+        marginTop: 10,
     },
 })
