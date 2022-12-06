@@ -9,7 +9,7 @@ import React from 'react'
 import colors from "../constants/colors";
 import { useState } from "react";
 
-const ListScreen = (props, {navigation}) => {
+const ListScreen = (props, { navigation }) => {
     const {onSaveList, listName} = props
     const [textItem, setTextItem] = useState('')
     const [list, setList] = useState([])

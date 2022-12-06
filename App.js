@@ -18,12 +18,9 @@ export default function App() {
     Roboto: require('./src/assets/fonts/Roboto-Regular.ttf')
   })
   
-  
-  
   const [listName, setListName] = useState('')
   const [selectScreen, setSelectScreen] = useState('')
   const [menuList, setMenuList] = useState([])
-  
 
   const handleStartList = (selectedName) => {
     setListName(selectedName)

@@ -1,35 +1,35 @@
-import { Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
 import Card from '../components/card'
-import Lista from '../components/lista'
+import GridItem from '../components/gridItem'
+import {TASKLIST} from '../data/tasklist'
 import colors from '../constants/colors'
 
 const WelcomeScreen = ({navigation}) => {
     const [listsExist, setListsExist] = useState(false)
     const screenName = 'createList'
 
-    const renderList = ({item}) => (
-        <View>
-            <Card>
-                <Text style={styles.subtitulo}>{item.name}</Text>
-                <TouchableOpacity style={styles.buttoncheck} onPress={() => completItem(item.id, item.name)}>
-                    <Text style={{color:"white"}}>Abrir</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonlista} onPress={() => selectedItem(item.id)}>
-                    <Text style={{color:"white"}}>X</Text>
-                </TouchableOpacity>
-            </Card>
-        </View>
+    const handleSelectedList = (item) => {
+        navigation.navigate('Lista', {
+            listID: item.id, name: item.title,
+        })
+    }
+
+    const renderGridItem = ({item}) => (
+        <GridItem item={item} onSelected={handleSelectedList} />
     )
     
     return (
     <View style={styles.screen}>
         <Text style={styles.titulo}>Bienvenid@!</Text>
         <Text style={styles.titulo}>Mis Listas:</Text>
-        <View style={styles.subContainer}>
-            <Text style={styles.subtitulo}>Aun no tienes listas...</Text>
-        </View>
+        <FlatList data={TASKLIST} keyExtractor={(item) => item.id} renderItem={renderGridItem}/>
+        {!TASKLIST && (
+            <View style={styles.subContainer}>
+                <Text style={styles.subtitulo}>Aun no tienes listas...</Text>
+            </View>
+        )} 
         <Card newStyles={{marginBottom: 50}}>
             <Pressable style={styles.createButton} onPress={() => navigation.navigate("Creando Lista")}>
                 <Text>Crear Lista</Text>
