@@ -54,7 +54,7 @@ const CreateListScreen = ({navigation}) => {
                 {confirmed && (
                     <Card newStyles={{marginTop:50,}}>
                         <Text style={{marginTop: 20,}}>Para crear la lista "{selectedName}", haz click en continuar</Text>
-                        <Button title="Continuar" onPress={() => navigation.navigate("Lista")}/>
+                        <Button title="Continuar" onPress={() => navigation.navigate("Lista", {name: selectedName})}/>
                     </Card>
                 )} 
                 

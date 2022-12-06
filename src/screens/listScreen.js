@@ -6,11 +6,11 @@ import Lista from "../components/lista"
 import ListaCompleta from "../components/completList";
 import Modal from "../components/modal"
 import React from 'react'
+import { TabRouter } from '@react-navigation/native';
 import colors from "../constants/colors";
 import { useState } from "react";
 
-const ListScreen = (props, { navigation }) => {
-    const {onSaveList, listName} = props
+const ListScreen = ({ navigation }, item) => {
     const [textItem, setTextItem] = useState('')
     const [list, setList] = useState([])
     const [subList, setSubList] = useState([])
@@ -58,8 +58,9 @@ const ListScreen = (props, { navigation }) => {
     }
 
     const saveChanges = () => {
-        setCompletList({id: Math.random().toString(), namelist: listName, itemsPending: list, itemsComplet: subList})
+        setCompletList({id: Math.random().toString(), namelist: navigation.params, itemsPending: list, itemsComplet: subList})
         console.log(completList)
+        navigation.navigate('Bienvenida')
     }
 
     const renderItem = ({item}) => (
@@ -87,7 +88,6 @@ const ListScreen = (props, { navigation }) => {
 return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.container}>
-            <Text style={styles.titulo}>Lista {listName}:</Text>
             <View style={styles.subContainer}>
                 <Text style={styles.midTitulo}>Crear Tareas</Text>
                 <Text style={styles.subtitulo}>Agrega aqui tus tareas pendientes para hoy</Text>
