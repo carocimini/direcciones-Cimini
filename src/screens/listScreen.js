@@ -6,14 +6,19 @@ import Lista from "../components/lista"
 import ListaCompleta from "../components/completList";
 import Modal from "../components/modal"
 import React from 'react'
-import { TabRouter } from '@react-navigation/native';
+import { TASKLIST } from '../data/tasklist';
+import { TASKS } from "../data/tasks"
 import colors from "../constants/colors";
 import { useState } from "react";
 
-const ListScreen = ({ navigation }, item) => {
+const ListScreen = ({ navigation, route }) => {
+    const totalList = TASKS.filter(task => task.tasklist === route.params.listID)
+    const listSelected = TASKLIST.filter(taskList => taskList.id === route.params.listID)
+    const listpending = totalList.filter(task => task.estado === 'pending')
+    const listcomplete = totalList.filter(task => task.estado === 'complete')
     const [textItem, setTextItem] = useState('')
-    const [list, setList] = useState([])
-    const [subList, setSubList] = useState([])
+    const [list, setList] = useState([...listpending])
+    const [subList, setSubList] = useState([...listcomplete])
 
     const [completList, setCompletList] = useState()
 
@@ -26,14 +31,14 @@ const ListScreen = ({ navigation }, item) => {
     const addItem = () => {
         setList((currentState) => [
         ...currentState,
-        { id: Math.random().toString(), value: textItem },
+        { id: Math.random().toString(), taskList: route.params.listID, name: textItem, estado: 'pending' },
         ])
         setTextItem('')
     }
 
     const completItem = (id, value) => {
         setSubList((currentState) => [
-            ...currentState, {id: id, value: value},
+            ...currentState, {id: id, taskList: route.params.listID, name: value, estado: 'complete'},
         ])
         setList((currentState) =>
         currentState.filter((item) => item.id !== id)
@@ -58,7 +63,7 @@ const ListScreen = ({ navigation }, item) => {
     }
 
     const saveChanges = () => {
-        setCompletList({id: Math.random().toString(), namelist: navigation.params, itemsPending: list, itemsComplet: subList})
+        setCompletList({id: Math.random().toString(), namelist: listSelected.name, itemsPending: list, itemsComplet: subList})
         console.log(completList)
         navigation.navigate('Bienvenida')
     }
@@ -66,10 +71,10 @@ const ListScreen = ({ navigation }, item) => {
     const renderItem = ({item}) => (
         <View style={styles.lista}>
             <View style={{width: '70%',}}>
-                <Text style={styles.subtitulo}>{item.value}</Text>
+                <Text style={styles.subtitulo}>{item.name}</Text>
             </View>
             <View style={{flexDirection: 'row',}}>
-                <TouchableOpacity style={styles.buttoncheck} onPress={() => completItem(item.id, item.value)}>
+                <TouchableOpacity style={styles.buttoncheck} onPress={() => completItem(item.id, item.name)}>
                     <Text style={{color:"white"}}>Lista</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonlista} onPress={() => selectedItem(item.id)}>
@@ -81,7 +86,7 @@ const ListScreen = ({ navigation }, item) => {
 
     const renderOldItem = ({item}) => (
         <View style={styles.sublista}>
-            <Text style={styles.subtitulo}>{item.value}</Text>
+            <Text style={styles.subtitulo}>{item.name}</Text>
         </View>
     )
 
