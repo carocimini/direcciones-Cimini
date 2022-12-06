@@ -25,7 +25,6 @@ const CreateListScreen = ({navigation}) => {
         setNameValue('')
     }
     const handleInput = (text) => {
-        console.log(text)
         setNameValue(text)
     }
 
@@ -33,7 +32,6 @@ const CreateListScreen = ({navigation}) => {
         setConfirmed(true)
         setSelectedName(nameValue)
         setNameValue('')
-        console.log(nameValue)
     }
     
     return (

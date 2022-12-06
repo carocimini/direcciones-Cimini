@@ -64,7 +64,6 @@ const ListScreen = ({ navigation, route }) => {
 
     const saveChanges = () => {
         setCompletList({id: Math.random().toString(), namelist: listSelected.name, itemsPending: list, itemsComplet: subList})
-        console.log(completList)
         navigation.navigate('Bienvenida')
     }
 

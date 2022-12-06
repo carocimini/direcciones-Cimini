@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     },
     button:{
         backgroundColor: colors.terciary,
+        borderColor: colors.terciary,
         height: 35,
         width: 45,
         justifyContent: "center",
