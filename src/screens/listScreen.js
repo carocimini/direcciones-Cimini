@@ -104,7 +104,7 @@ return (
                 <ListaCompleta subList={subList} renderOldItem={renderOldItem}/>
             </View>
             <View style={styles.bottomContainer}>
-                <Card newStyles={{marginBottom: 10, padding: 10,}}>
+                <Card newStyles={{marginBottom: 100, padding: 10,}}>
                     <Text style={styles.subtitulo}>Para guardar los cambios haz click en Actualizar</Text>
                     <Pressable style={styles.saveButton} onPress={saveChanges}>
                         <Text>Actualizar</Text>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     subListContainer: {
-        marginBottom: 5,
+        marginBottom: 20,
         flex: 1,
         alignItems: "center",
         paddingTop: 10,
