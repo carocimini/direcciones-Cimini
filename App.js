@@ -1,5 +1,7 @@
 import BottomTabNavigator from "./src/navigation/BottomTabNavigator";
+import { Provider } from "react-redux";
 import { StyleSheet } from "react-native";
+import store from "./src/store";
 import { useFonts } from "expo-font";
 
 export default function App() {
@@ -13,7 +15,9 @@ export default function App() {
   }
   
   return (
-    <BottomTabNavigator/>
+    <Provider store={store}>
+      <BottomTabNavigator/>
+    </Provider>
   )
 }
 

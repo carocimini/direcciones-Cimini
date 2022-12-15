@@ -1,18 +1,18 @@
 import { FlatList, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
 import Card from '../components/card'
 import GridItem from '../components/gridItem'
-import {TASKLIST} from '../data/tasklist'
 import colors from '../constants/colors'
 
 const WelcomeScreen = ({navigation}) => {
-    const [listsExist, setListsExist] = useState(false)
-    const screenName = 'createList'
+    const tasklists = useSelector((state) => state.tasklists.tasklists)
 
     const handleSelectedList = (item) => {
         navigation.navigate('Lista', {
-            listID: item.id, name: item.title,
+            listID: item.id, 
+            name: item.title,
         })
     }
 

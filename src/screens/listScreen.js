@@ -1,4 +1,5 @@
 import { Button, Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View, } from 'react-native'
+import { connect, useDispatch, useSelector } from 'react-redux';
 
 import AddItem from "../components/addItem"
 import Card from '../components/card';
@@ -6,12 +7,15 @@ import Lista from "../components/lista"
 import ListaCompleta from "../components/completList";
 import Modal from "../components/modal"
 import React from 'react'
-import { TASKLIST } from '../data/tasklist';
 import { TASKS } from "../data/tasks"
 import colors from "../constants/colors";
 import { useState } from "react";
 
 const ListScreen = ({ navigation, route }) => {
+    const dispatch = useDispatch()
+    const tasklist = useSelector((state) => state.tasklists.selected)
+    const task = useSelector((state) => state.tasklists.filteredTasks)
+    
     const totalList = TASKS.filter(task => task.tasklist === route.params.listID)
     const listSelected = TASKLIST.filter(taskList => taskList.id === route.params.listID)
     const listpending = totalList.filter(task => task.estado === 'pending')
