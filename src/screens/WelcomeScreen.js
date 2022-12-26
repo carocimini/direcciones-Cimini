@@ -4,14 +4,18 @@ import { connect, useDispatch, useSelector } from 'react-redux'
 
 import Card from '../components/card'
 import GridItem from '../components/gridItem'
+import { TASKLIST } from '../data/tasklist'
 import colors from '../constants/colors'
+import { selectedTasklist } from '../store/actions/tasklist.action'
 
 const WelcomeScreen = ({navigation}) => {
     const tasklists = useSelector((state) => state.tasklists.tasklists)
+    const dispatch = useDispatch()
 
     const handleSelectedList = (item) => {
+        dispatch(selectedTasklist(item.id))
         navigation.navigate('Lista', {
-            listID: item.id, 
+            listID: item.id,
             name: item.title,
         })
     }
@@ -39,7 +43,7 @@ const WelcomeScreen = ({navigation}) => {
     )
 }
 
-export default WelcomeScreen
+export default connect() (WelcomeScreen)
 
 const styles = StyleSheet.create({
     screen: {

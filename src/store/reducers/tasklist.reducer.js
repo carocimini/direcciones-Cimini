@@ -3,20 +3,20 @@ import { Switch } from 'react-native'
 import { TASKLIST } from '../../data/tasklist'
 
 const initialState = {
-    tasklists: TASKLIST,
+    tasklist: TASKLIST,
     selected: null
 }
 
 const TasklistReducer = (state = initialState, action) => {
     switch(action.type) {
         case SELECTED_TASKLIST:
-            const IndexTasklist = state.tasklists.findIndex(
+            const IndexTasklist = state.tasklist.findIndex(
                 cat => cat.id === action.tasklistID
             )
             if(IndexTasklist === -1) return state
-            return {...state, selected: state.tasklists[IndexTasklist]}
+            return {...state, selected: state.tasklist[IndexTasklist]}
         default:
-            break,
+            return state
     }
 }
 
