@@ -4,13 +4,20 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import React from 'react'
 import colors from '../constants/colors'
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
+const handlePicProfile = () => {
+    navigation.navigate("FotoPerfil")
+}
+    
   return (
     <View style={styles.screen}>
       <Text style={styles.titulo}>Mi Cuenta</Text>
       <View style={styles.subContainer}>
         <TouchableOpacity style={styles.options}>
             <Text><Ionicons name="book-outline" size={20} color='black'/>  Mis Datos</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.options} onPress={handlePicProfile}>
+            <Text><Ionicons name="camera-outline" size={20} color='black'/>  Mi Foto de Perfil</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.options}>
             <Text><Ionicons name="construct-outline" size={20} color='black'/>  Soporte</Text>
