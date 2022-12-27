@@ -5,7 +5,7 @@ import React from 'react'
 
 const ProfilePicScreen = ({ navigation }) => {
     const handleSave = () => {
-        navigation.navigate("Profile")
+        navigation.navigate("Perfil")
     }
     
     return (
